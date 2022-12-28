@@ -167,15 +167,15 @@ struct v2f {
 	float4 o8 : TEXCOORD10;
 };
 
-struct a2vO {
+struct Edge_a2v {
 	float4 v0 : POSITION0;
 	float3 v1 : TANGENT0;
 	float2 v2 : TEXCOORD0;
 	float4 v3 : COLOR0;
 };
 
-struct v2fO {
-	float4 o0 : SV_POSITION0;
+struct Edge_v2f {
+	float4 o0 : POSITION;
 	float2 o1 : TEXCOORD11;
 	float2 p1 : TEXCOORD12;
 };
@@ -424,12 +424,12 @@ float4 frag(v2f f) : COLOR0{
 	return result;
 }
 
-v2fO Edge_vert(a2vO v) {
+Edge_v2f Edge_vert(Edge_a2v v) {
 
-	v2fO f;
+	Edge_v2f f;
 	f.o0 = 0;
 	f.o1 = 0;
-	f.o1 = 0;
+	f.p1 = 0;
 
 	float4 r0, r1, r2;
 	r0.xyz = mul(float4(unity_MatrixInvV[0].y, unity_MatrixInvV[1].y, unity_MatrixInvV[2].y, unity_MatrixInvV[3].y), unity_WorldToObject).xyz;
@@ -479,7 +479,7 @@ v2fO Edge_vert(a2vO v) {
 	return f;
 }
 
-float4 Edge_frag(v2fO f) : COLOR0{
+float4 Edge_frag(Edge_v2f f) : COLOR0{
 	float4 r0,r1,r2;
 	float4 result;
 
@@ -514,10 +514,10 @@ float4 Edge_frag(v2fO f) : COLOR0{
 }
 
 technique MainTec < string MMDPass = "object"; > {
-	/*pass DarwObject {
+	pass DarwObject {
 		VertexShader = compile vs_3_0 vert();
 		PixelShader = compile ps_3_0 frag();
-	}*/
+	}
 	pass DrawEdge {
 		CULLMODE = CW;
 		VertexShader = compile vs_3_0 Edge_vert();
@@ -526,10 +526,10 @@ technique MainTec < string MMDPass = "object"; > {
 };
 
 technique MainTec_ss < string MMDPass = "object_ss"; > {
-	/*pass DarwObject {
+	pass DarwObject {
 		VertexShader = compile vs_3_0 vert();
 		PixelShader = compile ps_3_0 frag();
-	}*/
+	}
 	pass DrawEdge {
 		CULLMODE = CW;
 		VertexShader = compile vs_3_0 Edge_vert();
