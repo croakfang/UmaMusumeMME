@@ -11,10 +11,10 @@ float3 _WorldSpaceLightPos  	:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
 texture MainTexture : MATERIALTEXTURE;
-texture TripleMaskTexture < string ResourceName = "tex_chr1038_26_face_base.png"; > ;
-texture OptionMaskTexture < string ResourceName = "tex_chr1038_26_face_ctrl.png"; > ;
-texture ToonMapTexture < string ResourceName = "tex_chr1038_26_face_shad_c.png"; > ;
-texture EnvMapTexture < string ResourceName = "tex_chr_env000.png"; > ;
+texture TripleMaskTexture < string ResourceName = "Texture/tex_chr1038_26_face_base.png"; > ;
+texture OptionMaskTexture < string ResourceName = "Texture/tex_chr1038_26_face_ctrl.png"; > ;
+texture ToonMapTexture < string ResourceName = "Texture/tex_chr1038_26_face_shad_c.png"; > ;
+texture EnvMapTexture < string ResourceName = "Texture/tex_chr_env000.png"; > ;
 texture DirtTexture;
 texture EmissiveTexture;
 
@@ -335,14 +335,10 @@ float4 frag(v2f f) : COLOR0{
     r0.w = r12.z * _DirtRate[2] + r0.w;
     r5.xyz = r0.www * r11.xyz + r5.xyz;
 
-
-
     r0.xyz = r5.xyz * r0.xyz;
     r0.xyz = r0.xyz * _EnvBias + -r5.xyz;
     r1.z = _EnvRate * r1.z;
     r0.xyz = r1.zzz * r0.xyz + r5.xyz;
-
-
 
     r1.z = _RimStep + -_RimFeather;
     r1.x = r1.z + -r1.x;
