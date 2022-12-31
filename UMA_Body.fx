@@ -65,7 +65,7 @@ float4 _GlobalToonColor = float4(1, 1, 1, 0);
 float4 _GlobalRimColor = float4(1, 1, 1, 0);
 float4 _LightProbeColor = 1;
 float4 _EmissiveColor = 1;
-float _UseOriginalDirectionalLight = 1;
+float _UseOriginalDirectionalLight = 0;
 float3 _OriginalDirectionalLightDir = 1;
 float _VertexColorToonPower = 1;
 
