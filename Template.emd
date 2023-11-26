@@ -1,0 +1,30 @@
+[Info]
+Version = 3
+
+[Effect]
+Obj = none
+Obj[0] = UMA_Body.fx
+Obj[1] = UMA_Body.fx
+Obj[2] = UMA_Hair.fx
+Obj[3] = UMA_Face.fx
+Obj[4] = UMA_Face.fx
+Obj[5] = UMA_Face.fx
+Obj[6] = UMA_Face.fx
+Obj[7] = UMA_Face.fx
+Obj[8] = UMA_Face.fx
+Obj[9] = UMA_Face.fx
+Obj[10] = UMA_Eye.fx
+Obj[11] = UMA_Face.fx
+Obj[12] = UMA_Face.fx
+Obj[13] = UMA_Face.fx
+Obj[14] = UMA_Face.fx
+Obj[15] = none
+Obj[16] = UMA_Face.fx
+Obj[17] = UMA_Face.fx
+Obj[18] = UMA_Face.fx
+Obj[19] = UMA_Face.fx
+Obj[20] = UMA_Tail.fx
+Obj[21] = UMA_Body.fx
+Obj[22] = UMA_Body.fx
+Obj[23] = UMA_Body.fx
+

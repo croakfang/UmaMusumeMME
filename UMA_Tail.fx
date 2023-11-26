@@ -1,3 +1,12 @@
+/****************
+Made by CroakFang
+Update Date: 2023-11-26
+Project Address: https://github.com/croakfang/UmaMusumeMME
+Description: This MME requires models exported with UmaViewer to fully achieve its effects.
+This file must be saved in UTF-8 encoding to function correctly.
+Non-alphabetic characters must be encoded in Shift-JIS, or they will not be recognized. For example, the character "î^" should be written as "“ª".
+****************/
+
 #define cmp -
 float4x4 UNITY_MATRIX_V				:WORLDVIEW;
 float4x4 UNITY_MATRIX_VP			:WORLDVIEWPROJECTION;
@@ -11,10 +20,10 @@ float3 _WorldSpaceLightPos		:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
 texture MainTexture : MATERIALTEXTURE;
-texture TripleMaskTexture < string ResourceName = "Texture/tex_tail0001_00_0000_base.png"; > ;
-texture OptionMaskTexture < string ResourceName = "Texture/tex_tail0001_00_0000_ctrl.png"; > ;
-texture ToonMapTexture < string ResourceName = "Texture/tex_tail0001_00_1038_shad_c.png"; > ;
-texture EnvMapTexture < string ResourceName = "Texture/tex_chr_env000.png"; > ;
+texture TripleMaskTexture < string ResourceName = "Texture2D/tex_tail0002_00_0000_base.png"; > ;
+texture OptionMaskTexture < string ResourceName = "Texture2D/tex_tail0002_00_0000_ctrl.png"; > ;
+texture ToonMapTexture < string ResourceName = "Texture2D/tex_tail0002_00_2005_shad_c.png"; > ;
+texture EnvMapTexture < string ResourceName = "Texture2D/tex_chr_env000.png"; > ;
 texture DirtTexture;
 texture EmissiveTexture;
 
@@ -101,11 +110,19 @@ int FloatToInt(float f)
 	return ret.i;
 }
 
+/****************
+For models exported from UmaViewer:
+UV0 --> model UV
+UV1 --> Additional UV1
+UV2 --> Additional UV2
+Vertex Color -->Additional UV3
+****************/
+
 struct a2v {
 	float4 v0 : POSITION0;
 	float2 v1 : TEXCOORD0;
 	float3 v2 : NORMAL0;
-	float4 v3 : COLOR0;
+	float4 v3 : TEXCOORD3; //Vertex Color -->Additional UV3
 };
 
 struct v2f {
@@ -125,7 +142,7 @@ struct Edge_a2v {
 	float4 v0 : POSITION0;
 	float3 v1 : NORMAL0;
 	float2 v2 : TEXCOORD0;
-	float4 v3 : COLOR0;
+	float4 v3 : TEXCOORD3; //Vertex Color -->Additional UV3
 };
 
 struct Edge_v2f {
@@ -379,14 +396,13 @@ float4 frag(v2f f) : COLOR0{
 	return result;
 }
 
-Edge_v2f Edge_vert(Edge_a2v iv) {
+Edge_v2f Edge_vert(Edge_a2v v) {
 
 	Edge_v2f f;
 	f.o0 = 0;
 	f.o1 = 0;
 	f.p1 = 0;
 
-	Edge_a2v v = { iv.v0, iv.v1, iv.v2, float4(1,1,0,0) };
 	float4 r0, r1, r2;
 
 	r0.xyz = mul(float4(UNITY_MATRIX_I_V[0].y, UNITY_MATRIX_I_V[1].y, UNITY_MATRIX_I_V[2].y, UNITY_MATRIX_I_V[3].y), unity_WorldToObject).xyz;

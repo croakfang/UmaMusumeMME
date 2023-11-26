@@ -1,3 +1,11 @@
+/****************
+Made by CroakFang
+Update Date: 2023-11-26
+Project Address: https://github.com/croakfang/UmaMusumeMME
+Description: This MME requires models exported with UmaViewer to fully achieve its effects.
+This file must be saved in UTF-8 encoding to function correctly.
+Non-alphabetic characters must be encoded in Shift-JIS, or they will not be recognized. For example, the character "é ­" should be written as "æ‘¢".
+****************/
 #define cmp -
 float4x4 UNITY_MATRIX_V				:WORLDVIEW;
 float4x4 UNITY_MATRIX_VP			:WORLDVIEWPROJECTION;
@@ -10,21 +18,22 @@ float4x4 unity_WorldToObject		:WORLDINVERSE;
 float3 _WorldSpaceLightPos		:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
-texture MainTexture : MATERIALTEXTURE;
-texture High0Tex < string ResourceName = "Texture/tex_chr1038_26_eyehi00.png"; > ;
-texture High1Tex < string ResourceName = "Texture/tex_chr1038_26_eyehi01.png"; > ;
-texture High2Tex < string ResourceName = "Texture/tex_chr1038_26_eyehi02.png"; > ;
+texture MainTexture : MATERIALTEXTURE; //Unused in this fx
+texture MainTex < string ResourceName = "Texture2D/tex_chr2005_00_eye0_all.png"; > ;
+texture High0Tex < string ResourceName = "Texture2D/tex_chr2005_00_eyehi00.png"; > ;
+texture High1Tex < string ResourceName = "Texture2D/tex_chr2005_00_eyehi01.png"; > ;
+texture High2Tex < string ResourceName = "Texture2D/tex_chr2005_00_eyehi02.png"; > ;
 
-sampler2D _MainTex  = sampler_state { texture = <MainTexture>;	MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
+sampler2D _MainTex  = sampler_state { texture = <MainTex>;	MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
 sampler2D _High0Tex = sampler_state { texture = <High0Tex>;	    MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
 sampler2D _High1Tex = sampler_state { texture = <High1Tex>;	    MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
 sampler2D _High2Tex = sampler_state { texture = <High2Tex>;		MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
 
 
 float _EyePupliScale = 1;
-float4 _MainParam[] = { float4(0, 0, 0, 0), float4(0, 0, 0, 0) };//×óÓÒÑÛÆ«ÒÆ
-float4 _HighParam1[] = { float4(0, 0, 0, 1) , float4(0, 0, 0, 1) , float4(0, 0, 0, 0) };//×óÑÛÉÏ¸ß¹â£¨wÖµÎªÇ¿¶È£©¡¢×óÑÛÏÂ¸ß¹â¡¢Ë«ÑÛÉÁË¸Ð§¹û
-float4 _HighParam2[] = { float4(0, 0, 0, 1) , float4(0, 0, 0, 1) };//ÓÒÑÛÉÏ¸ß¹â¡¢ÓÒÑÛÏÂ¸ß¹â
+float4 _MainParam[] = { float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left and right eye offsets , x(0-3): eye type
+float4 _HighParam1[] = { float4(0, 0, 0, 0.3), float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left eye upper highlight (w value for intensity), left eye lower highlight, and bilateral blink effect
+float4 _HighParam2[] = { float4(0, 0, 0, 1), float4(0, 0, 0, 0), }; // Right eye upper highlight, right eye lower highlight
 float4 _MainTex_ST = float4(0.25, 1, 0, 0);
 float4 _High0Tex_ST = float4(1, 1, 0, 0);
 float4 _Offset = 1;
@@ -35,7 +44,7 @@ float _Global_MaxHeight = 10;
 float4 _Global_FogColor = 0;
 float _Global_MaxDensity = 10;
 
-float3 _FaceCenterPos : CONTROLOBJECT < string name = "Curren.pmx"; string item = "î^"; > ;
+float3 _FaceCenterPos : CONTROLOBJECT < string name = "Curren.pmx"; string item = "é ­"; > ;
 float3 _FaceUp = float3(0, 1, 0);
 float _CylinderBlend = 0.25;
 
@@ -44,7 +53,7 @@ float3 _OriginalDirectionalLightDir = 0;
 
 float _ToonStep = 0.4;
 float _ToonFeather = 0.1;
-float _Limit = 0;
+float _Limit = 0.1;//Hightlight Limit, keep it > 0 
 
 float4 _GlobalToonColor = float4(1, 1, 1, 0);
 float4 _ToonBrightColor = float4(1, 1, 1, 0);
@@ -71,6 +80,14 @@ int FloatToInt(float f)
 	ret.i -= bias.i;
 	return ret.i;
 }
+
+/****************
+For models exported from UmaViewer:
+UV0 --> model UV
+UV1 --> Additional UV1
+UV2 --> Additional UV2
+Vertex Color -->Additional UV3
+****************/
 
 struct a2v {
 	float4 v0 : POSITION;
