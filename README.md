@@ -1,4 +1,4 @@
 # UmaMusumeMME
 Umamusume Shader for MMD
-![image](https://user-images.githubusercontent.com/32562737/209969838-9e08f432-785f-4ec8-99e1-a2acae3954ed.png)
 
+![shader](https://github.com/croakfang/UmaMusumeMME/assets/32562737/508479a2-44d5-4fbf-9633-a4835d6a7d5b)
