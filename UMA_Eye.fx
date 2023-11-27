@@ -32,7 +32,7 @@ sampler2D _High2Tex = sampler_state { texture = <High2Tex>;		MINFILTER = LINEAR;
 
 float _EyePupliScale = 1;
 float4 _MainParam[] = { float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left and right eye offsets , x(0-3): eye type
-float4 _HighParam1[] = { float4(0, 0, 0, 0.3), float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left eye upper highlight (w value for intensity), left eye lower highlight, and bilateral blink effect
+float4 _HighParam1[] = { float4(0, 0, 0, 1), float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left eye upper highlight (w value for intensity), left eye lower highlight, and bilateral blink effect
 float4 _HighParam2[] = { float4(0, 0, 0, 1), float4(0, 0, 0, 0), }; // Right eye upper highlight, right eye lower highlight
 float4 _MainTex_ST = float4(0.25, 1, 0, 0);
 float4 _High0Tex_ST = float4(1, 1, 0, 0);
