@@ -80,7 +80,7 @@ float _VertexColorToonPower = 1;
 
 float _GlobalCameraFov = 30;
 float _GlobalOutlineWidth = 1;
-float _OutlineWidth = 0.2;
+float _OutlineWidth = 0.4;
 float _GlobalOutlineOffset = -0.1;
 float4 _OutlineColor = float4(0, 0, 0, 1); //TOONCOLOR;
 

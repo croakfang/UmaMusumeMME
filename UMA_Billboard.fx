@@ -179,80 +179,62 @@ v2f vert(a2v v)
     f.o8 = 0;
     
     float4 r0 = 0, r1 = 0, r2 = 0, r3 = 0, r4 = 0, r5 = 0;
-
-    // 1. 修复顶点坐标转换：模型空间→世界空间→视图空间（标准矩阵乘法）
-    // 替代原手动拆解矩阵的错误计算
-    float4 worldPos = mul(v.v0, unity_ObjectToWorld); // 模型→世界空间
-    r0 = mul(worldPos, UNITY_MATRIX_V); // 世界→视图空间（r0现在是视图空间坐标）
-
-    // 2. 保留原有的缩放因子计算（基于模型矩阵的x/y轴缩放）
+    float4 worldPos = mul(v.v0, unity_ObjectToWorld); 
+    r0 = mul(worldPos, UNITY_MATRIX_V);
     r1.w = dot(float3(unity_ObjectToWorld[0].x, unity_ObjectToWorld[1].x, unity_ObjectToWorld[2].x),
               float3(unity_ObjectToWorld[0].x, unity_ObjectToWorld[1].x, unity_ObjectToWorld[2].x));
-    r1.w = sqrt(r1.w); // x轴缩放因子
-    r0.x = v.v4.x * 12.5 * r1.w + r0.x; // 基于x缩放的偏移
-
+    r1.w = sqrt(r1.w);
+    r0.x = v.v4.x * 12.5 * r1.w + r0.x;
     r1.w = dot(float3(unity_ObjectToWorld[0].y, unity_ObjectToWorld[1].y, unity_ObjectToWorld[2].y),
               float3(unity_ObjectToWorld[0].y, unity_ObjectToWorld[1].y, unity_ObjectToWorld[2].y));
-    r1.w = sqrt(r1.w); // y轴缩放因子
-    r0.y = (1 - v.v4.y) * 12.5 * r1.w + r0.y; // 基于y缩放的偏移
+    r1.w = sqrt(r1.w); 
+    r0.y = (1 - v.v4.y) * 12.5 * r1.w + r0.y; 
 
-    // 3. 修复裁剪空间转换：视图空间→裁剪空间（标准矩阵乘法）
-    f.o0 = mul(r0, UNITY_MATRIX_P); // 正确计算裁剪空间坐标（用于渲染的核心）
+    f.o0 = mul(r0, UNITY_MATRIX_P); 
 
-    // 4. 保留雾效计算（基于视图空间坐标）
-    // 原逻辑中使用的是错误的坐标，此处修正为视图空间z值（r0.z）
-    r0.w = -_Global_FogMinDistance.w + -r0.z; // 雾效起始距离计算
-    r0.w = saturate(r0.w / _Global_FogLength.w); // 雾效强度衰减
+    r0.w = -_Global_FogMinDistance.w + -r0.z;
+    r0.w = saturate(r0.w / _Global_FogLength.w);
     r0.w = 1 + -r0.w;
     
-    // 高度相关的雾效衰减
-    r1.w = saturate(r0.y / _Global_MaxHeight); // 基于视图空间y的高度判断
+    r1.w = saturate(r0.y / _Global_MaxHeight);
     r1.w = 1 + -r1.w;
-    r0.w = r0.w * r1.w + _Global_MaxDensity; // 最终雾效密度
+    r0.w = r0.w * r1.w + _Global_MaxDensity;
     f.p1.xy = saturate(r0.ww);
 
-    // 5. 保留纹理坐标计算
     f.o1.xy = v.v1.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 
-    // 6. 保留法线转换（模型空间法线→世界空间法线）
+
     r0.w = dot(v.v2.xyz, v.v2.xyz);
     r0.w = sqrt(r0.w);
-    r1.w = cmp(9.99999975e-06 >= r0.w); // 避免除以0
+    r1.w = cmp(9.99999975e-06 >= r0.w);
     r1.w = r1.w ? 1.0 : 0.0;
     r2.x = 1 + -r0.w;
-    r0.w = r1.w * r2.x + r0.w; // 安全的法线长度
-    r2.xyz = v.v2.xyz / r0.www; // 归一化法线
+    r0.w = r1.w * r2.x + r0.w;
+    r2.xyz = v.v2.xyz / r0.www;
     
-    // 法线修正（根据_NormalizeNormal参数）
     r5.xyz = v.v2.xyz + -r2.xyz;
     r0.w = cmp(0.5 >= _NormalizeNormal);
     r0.w = r0.w ? 1.0 : 0.0;
     r2.xyz = r0.www * r5.xyz + r2.xyz;
     
-    // 模型空间法线→世界空间法线（使用模型矩阵的旋转部分）
     r5.xyz = float3(unity_ObjectToWorld[0].y, unity_ObjectToWorld[1].y, unity_ObjectToWorld[2].y) * r2.yyy;
     r5.xyz = float3(unity_ObjectToWorld[0].x, unity_ObjectToWorld[1].x, unity_ObjectToWorld[2].x) * r2.xxx + r5.xyz;
     f.o4.xyz = float3(unity_ObjectToWorld[0].z, unity_ObjectToWorld[1].z, unity_ObjectToWorld[2].z) * r2.zzz + r5.xyz;
 
-    // 7. 保留其他参数（根据原逻辑传递）
-    f.o5.xyz = r0.xyz; // 视图空间坐标传递
+    f.o5.xyz = r0.xyz;
 
-    // 8. 保留高光计算
-    r0.x = -_HightLightParam.x + r0.y; // 基于视图空间y的高光阈值
+    r0.x = -_HightLightParam.x + r0.y;
     r0.x = saturate(r0.x / _HightLightParam.y);
     r0.x = 1 + -r0.x;
     
-    // 高光方向计算（基于修正后的坐标）
     r0.yzw = r2.yyy * r1.xyz;
     r0.yzw = r3.xyz * r2.xxx + r0.yzw;
     f.o6.xyz = r4.xyz * r2.zzz + r0.yzw;
     
-    // 高光幂次计算
     r0.y = _SpecularPower * -10 + 11;
     f.o7.x = exp2(r0.y);
     f.o7.yzw = float3(0, 0, 0);
     
-    // 高光强度曲线计算
     r0.y = 2 + -r0.x;
     r0.z = -r0.x * 2 + 3;
     r0.yw = r0.xx * r0.yx;
@@ -265,7 +247,6 @@ v2f vert(a2v v)
     r0.y = r0.y + -r0.x;
     r0.x = r1.z * r0.y + r0.x;
     
-    // 高光颜色输出
     f.o8.xyz = _HightLightColor.xyz * r0.xxx;
     f.o8.w = r0.x;
 
