@@ -1,14 +1,12 @@
 # UmaMusumeMME
 Umamusume Shader for MMD
+![show](https://github.com/user-attachments/assets/b181bef5-ea9f-4aae-8d7b-e0697743cea5)
 
-Model rip by 红白de黑白、无名
-
-![shader](https://github.com/croakfang/UmaMusumeMME/assets/32562737/508479a2-44d5-4fbf-9633-a4835d6a7d5b)
 
 # Usage
 此MME需要使用[UmaViewer](https://github.com/katboi01/UmaViewer)导出的模型才能完全工作。  
 
-### 对于 `UMA_Body.fx` / `UMA_Hair.fx` / `UMA_Tail.fx`
+### 对于 `UMA_Body.fx` / `UMA_Hair.fx` / `UMA_Tail.fx` / `UMA_Billboard.fx`
 1. 找到以下内容：
 ```
 texture TripleMaskTexture < string ResourceName = "Texture2D/tex_bdy2005_00_base.png"; > ;
