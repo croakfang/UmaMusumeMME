@@ -19,9 +19,9 @@ float3 _WorldSpaceLightPos		:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
 texture MainTexture : MATERIALTEXTURE;
-texture TripleMaskTexture < string ResourceName = "Texture2D/tex_chr2005_00_hair_base.png"; > ;
-texture OptionMaskTexture < string ResourceName = "Texture2D/tex_chr2005_00_hair_ctrl.png"; > ;
-texture ToonMapTexture < string ResourceName = "Texture2D/tex_chr2005_00_hair_shad_c.png"; > ;
+texture TripleMaskTexture < string ResourceName = "Texture2D/tex_chr1089_30_hair_base.png"; >;
+texture OptionMaskTexture < string ResourceName = "Texture2D/tex_chr1089_30_hair_ctrl.png"; >;
+texture ToonMapTexture < string ResourceName = "Texture2D/tex_chr1089_30_hair_shad_c.png"; >;
 texture EnvMapTexture < string ResourceName = "Texture2D/tex_chr_env000.png"; > ;
 texture DirtTexture;
 texture EmissiveTexture;
@@ -80,7 +80,7 @@ float _VertexColorToonPower = 1;
 float _GlobalCameraFov = 30;
 float _GlobalOutlineWidth = 1;
 float _OutlineWidth = 0.2;
-float _GlobalOutlineOffset = 0;
+float _GlobalOutlineOffset = -0.1;
 float4 _OutlineColor = float4(0, 0, 0, 1); // : TOONCOLOR;
 
 float _HairNormalBlend;

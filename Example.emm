@@ -1,0 +1,25 @@
+[Info]
+Version = 3
+
+[Object]
+Pmd1 = D:\Work\VSProject\croakfang\UmaMusumeMME\model.pmx
+Pmd2 = D:\Work\VSProject\croakfang\UmaMusumeMME\model.pmx
+
+[Effect]
+Default = none
+Pmd1 = none
+Pmd2 = none
+Pmd2.show = true
+Pmd2[0] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Body.fx
+Pmd2[1] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Body.fx
+Pmd2[2] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Body.fx
+Pmd2[3] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Body.fx
+Pmd2[4] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Face.fx
+Pmd2[5] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Face.fx
+Pmd2[6] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Eye.fx
+Pmd2[7] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Hair.fx
+Pmd2[8] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Billboard.fx
+Pmd2[9].show = false
+Pmd2[10] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Face.fx
+Pmd2[11] = D:\Work\VSProject\croakfang\UmaMusumeMME\UMA_Tail.fx
+

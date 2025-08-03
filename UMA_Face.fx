@@ -20,9 +20,9 @@ float3 _WorldSpaceLightPos  	:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
 texture MainTexture : MATERIALTEXTURE;
-texture TripleMaskTexture < string ResourceName = "Texture2D/tex_chr2005_00_face_base.png"; > ;
-texture OptionMaskTexture < string ResourceName = "Texture2D/tex_chr2005_00_face_ctrl.png"; > ;
-texture ToonMapTexture < string ResourceName = "Texture2D/tex_chr2005_00_face_shad_c.png"; > ;
+texture TripleMaskTexture < string ResourceName = "Texture2D/tex_chr1089_30_face_base.png"; >;
+texture OptionMaskTexture < string ResourceName = "Texture2D/tex_chr1089_30_face_ctrl.png"; >;
+texture ToonMapTexture < string ResourceName = "Texture2D/tex_chr1089_30_face_shad_c.png"; > ;
 texture EnvMapTexture < string ResourceName = "Texture2D/tex_chr_env000.png"; > ;
 texture DirtTexture;
 texture EmissiveTexture;
@@ -85,7 +85,7 @@ float _GlobalOutlineOffset = -0.1;
 float4 _OutlineColor = float4(0, 0, 0, 1); //TOONCOLOR;
 
 float _CylinderBlend = 0.25;
-float4x4 _faceShadowHeadMat : CONTROLOBJECT < string name = "model.pmx"; string item = "摢"; > ; //replace name to your model filename (Shift-JIS)
+float4x4 _faceShadowHeadMat : CONTROLOBJECT < string name = "model.pmx"; string item = "head"; > ; //replace name to your model filename (Shift-JIS)
 float3 _LocalFaceUp = float3(0, 1, 0);
 float3 _LocalFaceForward = float3(0, 0, -1);
 float _CheekPretenseThreshold = 0.775;

@@ -19,10 +19,10 @@ float3 _WorldSpaceLightPos		:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
 texture MainTexture : MATERIALTEXTURE; //Unused in this fx
-texture MainTex < string ResourceName = "Texture2D/tex_chr2005_00_eye0_all.png"; > ;
-texture High0Tex < string ResourceName = "Texture2D/tex_chr2005_00_eyehi00.png"; > ;
-texture High1Tex < string ResourceName = "Texture2D/tex_chr2005_00_eyehi01.png"; > ;
-texture High2Tex < string ResourceName = "Texture2D/tex_chr2005_00_eyehi02.png"; > ;
+texture MainTex < string ResourceName = "Texture2D/tex_chr1089_30_eye0_all.png"; >;
+texture High0Tex < string ResourceName = "Texture2D/tex_chr1089_30_eyehi00.png"; >;
+texture High1Tex < string ResourceName = "Texture2D/tex_chr1089_30_eyehi01.png"; >;
+texture High2Tex < string ResourceName = "Texture2D/tex_chr1089_30_eyehi02.png"; >;
 
 sampler2D _MainTex  = sampler_state { texture = <MainTex>;	MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
 sampler2D _High0Tex = sampler_state { texture = <High0Tex>;	    MINFILTER = LINEAR;	MAGFILTER = LINEAR;	MIPFILTER = LINEAR; };
@@ -32,8 +32,8 @@ sampler2D _High2Tex = sampler_state { texture = <High2Tex>;		MINFILTER = LINEAR;
 
 float _EyePupliScale = 1;
 float4 _MainParam[] = { float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left and right eye offsets , x(0-3): eye type
-float4 _HighParam1[] = { float4(0, 0, 0, 1), float4(0, 0, 0, 0), float4(0, 0, 0, 0) }; // Left eye upper highlight (w value for intensity), left eye lower highlight, and bilateral blink effect
-float4 _HighParam2[] = { float4(0, 0, 0, 1), float4(0, 0, 0, 0), }; // Right eye upper highlight, right eye lower highlight
+float4 _HighParam1[] = { float4(0, 0, 0, 0.22), float4(0, 0, 0, 0.22), float4(0, 0, 0, 0) }; // Left eye upper highlight (w value for intensity), left eye lower highlight, and bilateral blink effect
+float4 _HighParam2[] = { float4(0, 0, 0, 0.22), float4(0, 0, 0, 0.22), }; // Right eye upper highlight, right eye lower highlight
 float4 _MainTex_ST = float4(0.25, 1, 0, 0);
 float4 _High0Tex_ST = float4(1, 1, 0, 0);
 float4 _Offset = 1;

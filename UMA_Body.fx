@@ -20,9 +20,9 @@ float3 _WorldSpaceLightPos		:DIRECTION < string Object = "Light"; > ;
 float3 _WorldSpaceCameraPos		:POSITION < string Object = "Camera"; > ;
 
 texture MainTexture : MATERIALTEXTURE;
-texture TripleMaskTexture < string ResourceName = "Texture2D/tex_bdy2005_00_base.png"; > ;
-texture OptionMaskTexture < string ResourceName = "Texture2D/tex_bdy2005_00_ctrl.png"; > ;
-texture ToonMapTexture < string ResourceName = "Texture2D/tex_bdy2005_00_shad_c.png"; > ;
+texture TripleMaskTexture < string ResourceName = "Texture2D/tex_bdy1089_30_base.png"; > ;
+texture OptionMaskTexture < string ResourceName = "Texture2D/tex_bdy1089_30_ctrl.png"; >;
+texture ToonMapTexture < string ResourceName = "Texture2D/tex_bdy1089_30_shad_c.png"; >;
 texture EnvMapTexture < string ResourceName = "Texture2D/tex_chr_env000.png"; > ;
 texture DirtTexture;
 texture EmissiveTexture;
